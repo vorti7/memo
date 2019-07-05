@@ -1,0 +1,88 @@
+/* Previous Theme CSS */
+@-webkit-keyframes bounce{
+    0%, 100%   {bottom: 0; opacity:1;}
+    50% {bottom: -15px; opacity:0.7;}
+}
+@-moz-keyframes bounce{
+    0%, 100%   {bottom: 0; opacity:1;}
+    50% {bottom: -15px; opacity:0.7;}
+}
+@-o-keyframes bounce{
+    0%, 100%   {bottom: 0; opacity:1;}
+    50% {bottom: -15px; opacity:0.7;}
+}
+@keyframes bounce{
+    0%, 100%   {bottom: 0; opacity:1;}
+    50% {bottom: -15px; opacity:0.7;}
+}
+
+.cover:hover .down-arrow{
+    -webkit-animation: bounce 2s infinite; 
+    -moz-animation: bounce 2s infinite;
+    animation: bounce 2s infinite;
+}
+
+.grp.media.embed {
+    padding: 0;
+}
+
+.iframe svg {
+    display: block;
+}
+
+.item {
+    position: relative !important;
+    display: table;
+}
+
+.centered-content {
+    display: table-cell; 
+    vertical-align: middle !important; 
+}
+
+.top-centered-content {
+    vertical-align: top !important; 
+}
+
+.repeatable-fix {
+    padding-bottom: 98%;
+    border-style: solid;
+    padding-left: 0em;
+    padding-top: 0em;
+    padding-right: 0em;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('//d24wuq6o951i2g.cloudfront.net/img/events/id/205/2058638/assets/176.charlie.jpg');
+}
+
+.audio.media .embed iframe {
+    max-width: 100% !important;
+}
+
+.s3.audio > .grp.body, .s3.map > .grp.body {
+    display: none !important;
+}
+
+.diamond {
+   -webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+body:not(.isLegacy) [block-type="map"].s1.map-bottom .body {
+    display: none;
+}
+
+.s3.video .body, .s3.audio .body {
+    display: none !important
+}
+
+.cover {
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+#splash-container .cms-block-type-mapbox .mapbox,
+#splash-container .cms-block-type-mapbox .leaflet-map-pane{
+    -webkit-transform: translate3d(0,0,0);
+}
