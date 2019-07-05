@@ -1,0 +1,89 @@
+# Click the orange "Play" button and select the createTraveler
+# mutation to create an object in DynamoDB.
+# If you see an error that starts with "Unable to assume role",
+# wait a moment and try again.
+mutation createTraveler($createtravelerinput: CreateTravelerInput!) {
+  createTraveler(input: $createtravelerinput) {
+    ID
+    SORTKEY
+    locationID
+  	email
+    status
+    firstName
+    lastName
+    nickName
+    gender
+    birthday
+    phone
+    languages
+    photoURL
+    regIP
+    regDate
+    updateIP
+    updateDate
+    deactivateIP
+    deactivateDate
+  }
+}
+
+
+# After running createTraveler, try running the listTravelers query.
+query getTravelInfo {
+  listTravelers (filter: {
+    ID: {
+      eq: "user02"
+    },
+    SORTKEY: {
+      contains: "traveler_"
+    }
+  })  {
+    items {
+      ID
+      SORTKEY
+      locationID
+      email
+      status
+      firstName
+      lastName
+      nickName
+      gender
+      birthday
+      phone
+      languages
+      photoURL
+      regIP
+      regDate
+      updateIP
+      updateDate
+      deactivateIP
+      deactivateDate
+    }
+  }
+}
+
+query getTraveler {
+  getTraveler(ID:"user01",SORTKEY:"traveler_*") {
+    ID
+    SORTKEY
+    locationID
+    email
+    status
+    firstName
+    lastName
+    nickName
+    gender
+    birthday
+    phone
+    languages
+    photoURL
+    regIP
+    regDate
+    updateIP
+    updateDate
+    deactivateIP
+    deactivateDate
+  }
+}
+
+
+

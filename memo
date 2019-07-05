@@ -1,0 +1,184 @@
+type Traveler {
+	id: ID!
+	locationID: String
+	email: AWSEmail
+	status: String
+	firstName: String
+	lastName: String
+	nickName: String
+	gender: String
+	birthday: AWSDate
+	phone: AWSPhone
+	languages: [String]
+	photoURL: AWSURL
+	regIP: AWSIPAddress
+	regDate: AWSDateTime
+	updateIP: AWSIPAddress
+	updateDate: AWSDateTime
+	deactivateIP: AWSIPAddress
+	deactivateDate: AWSDateTime
+}
+
+type Provider {
+	providerID : String!
+	provider_regDate : String!
+	type : String
+	companyID : String
+	companyStatus : String
+	campanyInfo :{
+		…
+	}
+	certInfo :{
+		…
+	}
+	welcomeMSG : String
+	serviceList : String
+	email : AWSEmail!
+	locationID : String!
+	status : String!
+	firstName : String
+	lastName : String
+	nickName : String
+	gender : String
+	birthday : AWSDateTime
+	photoURL : String
+	phone : AWSPhone
+	languages : String
+	regIP : AWSIPAddress
+	regDate : AWSDateTime
+	updateIP : AWSIPAddress
+	updateDate : AWSDateTime
+	deactivateIP : AWSIPAddress
+	deactivateDate : AWSDateTime
+}
+
+type Company {
+	companyID : String!
+	company_regDate : String!
+	name : String
+	desc : String
+	address : String
+	phone : AWSPhone
+	logoImages : {
+		…
+	}
+	photoImages : {
+		…
+	}
+	membersCount : Int
+	membersLimit : Int
+	regIP : AWSIPAddress
+	regDate : AWSDateTime
+	updateIP : AWSIPAddress
+	updateDate : AWSDateTime
+	deactivateIP : AWSIPAddress
+	deactivateDate : AWSDateTime
+}
+
+
+type TripRequest {
+	travelerID : String!
+	trip_req_regDate : String!
+	locationID : String
+	tripReqInfo : {
+		…
+	}
+	selectedProviders : Int
+	recipients : {
+		..
+	}
+	checked : {
+		…
+	}
+	participants : {
+		…
+	}
+	refusers : {
+		…
+	}
+	expTime : AWSDateTime
+	regIP : AWSIPAddress
+	regDate : AWSDateTime
+	updateIP : AWSIPAddress
+	updateDate : AWSDateTime	
+}
+
+type TripOffer {
+	providerID : String!
+	trip_offer_regDate : String!
+	tripReqID : String!
+	locationID : String
+	chatID : String
+	title : String
+	tripOfferInfo : {
+		…
+	}
+	status : String
+	paymentInfo : {
+		…
+	}
+	expTime : AWSDateTime
+	regIP : AWSIPAddress
+	regDate : AWSDateTime
+	updateIP : AWSIPAddress
+	updateDate : AWSDateTime	
+}
+
+type ServiceOffer {
+	providerID : String!
+	svc_offer_regDate : String!
+	tripOfferID : String!
+	locationID : String!
+	type : String
+	bookingInfo : {
+		…
+	}
+	info : {
+		…
+	}
+	svcCategoryIDX : String
+	comments : {
+		…
+	}
+	expTime : AWSDateTime
+	regIP : AWSIPAddress
+	regDate : AWSDateTime
+	updateIP : AWSIPAddress
+	updateDate : AWSDateTime
+}
+
+type Location {
+	locationID : String!
+	location_Code : String!
+	region : String!
+	locationName : String!
+	mapInfo : 
+	locationInfo : 
+	order : 
+}
+
+type Chat {
+	chatID : String!
+	chat_room_regDate : String!
+	name : String
+	user : {
+		…
+	}
+	regIP : AWSIPAddress
+	regDate : AWSDateTime
+	updateIP : AWSIPAddress
+	updateDate : AWSDateTime
+}
+
+type Message {
+	chatID : String!
+	message_regDate : String!
+	userID : String!
+	type : String
+	message: String
+	regIP : AWSIPAddress
+	regDate : AWSDateTime
+	updateIP : AWSIPAddress
+	updateDate : AWSDateTime	
+}
+

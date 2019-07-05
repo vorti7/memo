@@ -1,0 +1,219 @@
+type Traveler {
+	ID: String!
+	SORTKEY: String!
+	locationID: String
+	email: AWSEmail
+	status: String
+	firstName: String
+	lastName: String
+	nickName: String
+	gender: String
+	birthday: AWSDate
+	phone: AWSPhone
+	languages: [String]
+	photoURL: AWSURL
+	regIP: AWSIPAddress
+	regDate: String
+	updateIP: AWSIPAddress
+	updateDate: String
+	deactivateIP: AWSIPAddress
+	deactivateDate: String
+}
+
+type TripRequest {
+	ID : String!
+	SORTKEY : String!
+	locationID : String
+	tripReqInfo : AWSJSON
+	selectedProviders : Int
+	recipients : [String]
+	checked : [String]
+	participants : [String]
+	refusers : [String]
+	expTime : AWSDateTime
+	regIP : AWSIPAddress
+	regDate : AWSDateTime
+	updateIP : AWSIPAddress
+	updateDate : AWSDateTime	
+}
+
+input CreateTravelerInput {
+	ID: String!
+	locationID: String
+	email: AWSEmail
+	status: String
+	firstName: String
+	lastName: String
+	nickName: String
+	gender: String
+	birthday: AWSDate
+	phone: AWSPhone
+	languages: [String]
+	photoURL: AWSURL
+	regIP: AWSIPAddress
+	regDate: String
+	updateIP: AWSIPAddress
+	updateDate: String
+}
+
+input CreateTripRequestInput {
+	ID : String!
+	locationID : String
+	tripReqInfo : AWSJSON
+	selectedProviders : Int
+	recipients : [String]
+	checked : [String]
+	participants : [String]
+	refusers : [String]
+	expTime : AWSDateTime
+	regIP : AWSIPAddress
+	regDate : AWSDateTime
+	updateIP : AWSIPAddress
+	updateDate : AWSDateTime
+}
+
+input UpdateTravelerInput {
+	ID: String!
+	SORTKEY: String!
+	locationID: String
+	email: AWSEmail
+	status: String
+	firstName: String
+	lastName: String
+	nickName: String
+	gender: String
+	birthday: AWSDate
+	phone: AWSPhone
+	languages: [String]
+	photoURL: AWSURL
+	regIP: AWSIPAddress
+	regDate: String
+	updateIP: AWSIPAddress
+	updateDate: String
+	deactivateIP: AWSIPAddress
+	deactivateDate: String
+}
+
+input DeleteTravelerInput {
+	ID: String!
+	SORTKEY: String!
+}
+
+input TableTravelerFilterInput {
+	ID: TableStringFilterInput
+	SORTKEY: TableStringFilterInput
+	locationID: TableStringFilterInput
+	email: TableStringFilterInput
+	status: TableStringFilterInput
+	firstName: TableStringFilterInput
+	lastName: TableStringFilterInput
+	nickName: TableStringFilterInput
+	gender: TableStringFilterInput
+	birthday: TableStringFilterInput
+	phone: TableStringFilterInput
+	languages: TableStringFilterInput
+	photoURL: TableStringFilterInput
+	regIP: TableStringFilterInput
+	regDate: TableStringFilterInput
+}
+
+
+
+type TravelerConnection {
+	items: [Traveler]
+	nextToken: String
+}
+
+type Mutation {
+	createTraveler(input: CreateTravelerInput!): Traveler
+	# createTripRequest(input: CreateTripRequestInput!): TripRequest
+	updateTraveler(input: UpdateTravelerInput!): Traveler
+	deleteTraveler(input: DeleteTravelerInput!): Traveler
+}
+
+type Query {
+	getTraveler(ID: String!, SORTKEY: String!): Traveler
+	listTravelers(filter: TableTravelerFilterInput, limit: Int, nextToken: String): TravelerConnection
+}
+
+type Subscription {
+	onCreateTraveler(
+		ID: String,
+		SORTKEY: String,
+		locationID: String,
+		email: AWSEmail,
+		status: String
+	): Traveler
+		@aws_subscribe(mutations: ["createTraveler"])
+	onUpdateTraveler(
+		ID: String,
+		SORTKEY: String,
+		locationID: String,
+		email: AWSEmail,
+		status: String
+	): Traveler
+		@aws_subscribe(mutations: ["updateTraveler"])
+	onDeleteTraveler(
+		ID: String,
+		SORTKEY: String,
+		locationID: String,
+		email: AWSEmail,
+		status: String
+	): Traveler
+		@aws_subscribe(mutations: ["deleteTraveler"])
+}
+
+input TableBooleanFilterInput {
+	ne: Boolean
+	eq: Boolean
+}
+
+input TableFloatFilterInput {
+	ne: Float
+	eq: Float
+	le: Float
+	lt: Float
+	ge: Float
+	gt: Float
+	contains: Float
+	notContains: Float
+	between: [Float]
+}
+
+input TableIDFilterInput {
+	ne: ID
+	eq: ID
+	le: ID
+	lt: ID
+	ge: ID
+	gt: ID
+	contains: ID
+	notContains: ID
+	between: [ID]
+	beginsWith: ID
+}
+
+input TableIntFilterInput {
+	ne: Int
+	eq: Int
+	le: Int
+	lt: Int
+	ge: Int
+	gt: Int
+	contains: Int
+	notContains: Int
+	between: [Int]
+}
+
+input TableStringFilterInput {
+	ne: String
+	eq: String
+	le: String
+	lt: String
+	ge: String
+	gt: String
+	contains: String
+	notContains: String
+	between: [String]
+	beginsWith: String
+}
