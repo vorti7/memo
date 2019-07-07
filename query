@@ -26,6 +26,24 @@ mutation createTraveler($createtravelerinput: CreateTravelerInput!) {
   }
 }
 
+mutation createTripRequest($createtriprequestinput: CreateTripRequestInput!) {
+  createTripRequest(input: $createtriprequestinput) {
+    ID
+    SORTKEY
+    locationID
+    tripReqInfo
+    selectedProviders
+    recipients
+    checked
+    participants
+    refusers
+    expTime
+    regIP
+    regDate
+    updateIP
+    updateDate
+  }
+}
 
 # After running createTraveler, try running the listTravelers query.
 query getTravelInfo {

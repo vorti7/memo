@@ -1,0 +1,31 @@
+{
+  "version": "2017-02-28",
+  "operation": "PutItem",
+  "key": {
+    "ID": $util.dynamodb.toDynamoDBJson($ctx.args.input.ID),
+    "SORTKEY": {"S" : "trip_req_$util.time.nowEpochMilliSeconds()"},
+  },
+  "attributeValues" : {
+	"locationID": { "S" : "${context.args.input.locationID}" },
+	## "tripReqInfo": { "S" : "" },
+	"selectedProviders": { "N" : "${context.args.input.selectedProviders}" },
+	## "recipients" : [String]
+	## "checked" : [String]
+	## "participants" : [String]
+	## "refusers" : [String]
+    "expTime" : { "S" : "$util.time.nowEpochMilliSeconds()" },
+	"regIP": { "S" : "${context.args.input.regIP}" },
+	"regDate": { "S" : "$util.time.nowEpochMilliSeconds()" },
+	"updateIP": { "S" : "${context.args.input.updateIP}" },
+	"updateDate": { "S" : "$util.time.nowEpochMilliSeconds()" },
+	## "deactivateIP": { "S" : "${context.arguments.deactivateIP}" },
+	## "deactivateDate": { "S" : "" },
+  },
+  "condition": {
+    "expression": "attribute_not_exists(#ID) AND attribute_not_exists(#SORTKEY)",
+    "expressionNames": {
+      "#ID": "ID",
+      "#SORTKEY": "SORTKEY",
+    },
+  },
+}

@@ -1,0 +1,34 @@
+{
+  "version": "2017-02-28",
+  "operation": "PutItem",
+  "key": {
+    "ID": $util.dynamodb.toDynamoDBJson($ctx.args.input.ID),
+    "SORTKEY": {"S" : "traveler_$util.time.nowEpochMilliSeconds()"},
+  },
+  "attributeValues" : {
+	"locationID": { "S" : "${context.args.input.locationID}" },
+	"email": { "S" : "${context.args.input.email}" },
+	"status": { "S" : "${context.args.input.status}" },
+	"firstName": { "S" : "${context.args.input.firstName}" },
+	"lastName": { "S" : "${context.args.input.lastName}" },
+	"nickName": { "S" : "${context.args.input.nickName}" },
+	"gender": { "S" : "${context.args.input.gender}" },
+	"birthday": { "S" : "${context.args.input.birthday}" },
+	"phone": { "S" : "${context.args.input.phone}" },
+	## "languages": { "L" : $util.dynamodb.toList($context.args.input.languages) },
+	"photoURL": { "S" : "${context.args.input.photoURL}" },
+	"regIP": { "S" : "${context.args.input.regIP}" },
+	"regDate": { "S" : "$util.time.nowEpochMilliSeconds()" },
+	"updateIP": { "S" : "${context.args.input.updateIP}" },
+	"updateDate": { "S" : "$util.time.nowEpochMilliSeconds()" },
+	## "deactivateIP": { "S" : "${context.arguments.deactivateIP}" },
+	## "deactivateDate": { "S" : "" },
+  },
+  "condition": {
+    "expression": "attribute_not_exists(#ID) AND attribute_not_exists(#SORTKEY)",
+    "expressionNames": {
+      "#ID": "ID",
+      "#SORTKEY": "SORTKEY",
+    },
+  },
+}

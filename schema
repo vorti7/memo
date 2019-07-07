@@ -30,11 +30,46 @@ type TripRequest {
 	checked : [String]
 	participants : [String]
 	refusers : [String]
-	expTime : AWSDateTime
+	expTime : String
 	regIP : AWSIPAddress
-	regDate : AWSDateTime
+	regDate : String
 	updateIP : AWSIPAddress
-	updateDate : AWSDateTime	
+	updateDate : String	
+}
+
+type Location {
+	ID : String!
+	SORTKEY : String!
+	region : String!
+	locationName : String!
+	mapInfo : AWSJSON
+	locationInfo : AWSJSON
+	order : AWSJSON
+}
+
+type Chat {
+	ID : String!
+	SORTKEY : String!
+	name : String
+	user : [String]
+	regIP : AWSIPAddress
+	regDate : String
+	updateIP : AWSIPAddress
+	updateDate : String
+}
+
+ 
+
+type Message {
+	ID : String!
+	SORTKEY : String!
+	userID : String
+	type : String
+	message: String
+	regIP : AWSIPAddress
+	regDate : String
+	updateIP : AWSIPAddress
+	updateDate : String
 }
 
 input CreateTravelerInput {
@@ -67,10 +102,41 @@ input CreateTripRequestInput {
 	refusers : [String]
 	expTime : AWSDateTime
 	regIP : AWSIPAddress
-	regDate : AWSDateTime
-	updateIP : AWSIPAddress
-	updateDate : AWSDateTime
+	# regDate : AWSDateTime
+	# updateIP : AWSIPAddress
+	# updateDate : AWSDateTime
 }
+
+input CreateLocationInput {
+	ID : String!
+	region : String!
+	locationName : String!
+	mapInfo : AWSJSON
+	locationInfo : AWSJSON
+	order : AWSJSON
+}
+
+input CreateChatInput {
+	ID : String!
+	name : String
+	user : [String]
+	regIP : AWSIPAddress
+	# regDate : String
+	# updateIP : AWSIPAddress
+	# updateDate : String
+}
+
+input CreateMessageInput {
+	ID : String!
+	userID : String
+	type : String
+	message: String
+	regIP : AWSIPAddress
+	# regDate : String
+	# updateIP : AWSIPAddress
+	# updateDate : String
+}
+
 
 input UpdateTravelerInput {
 	ID: String!
@@ -117,8 +183,6 @@ input TableTravelerFilterInput {
 	regDate: TableStringFilterInput
 }
 
-
-
 type TravelerConnection {
 	items: [Traveler]
 	nextToken: String
@@ -126,7 +190,10 @@ type TravelerConnection {
 
 type Mutation {
 	createTraveler(input: CreateTravelerInput!): Traveler
-	# createTripRequest(input: CreateTripRequestInput!): TripRequest
+	createTripRequest(input: CreateTripRequestInput!): TripRequest
+	createLocation(input: CreateLocationInput!): Location
+	createChat(input: CreateChatInput!): Chat
+	createMessage(input: CreateMessageInput!): Message
 	updateTraveler(input: UpdateTravelerInput!): Traveler
 	deleteTraveler(input: DeleteTravelerInput!): Traveler
 }

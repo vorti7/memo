@@ -1,0 +1,35 @@
+{
+  "createtravelerinput": {
+    "ID": "user06",
+    "locationID": "Hello, world!",
+    "email": "username@example.com",
+    "status": "Hello, world!",
+    "firstName": "Hello, world!",
+    "lastName": "Hello, world!",
+    "nickName": "Hello, world!",
+    "gender": "Hello, world!",
+    "birthday": "1970-01-01Z",
+    "phone": "800-867-5309",
+    "languages": [
+      "Hello, world!",
+      "Hello, world!",
+      "Hello, world!"
+    ],
+    "photoURL": "https://aws.amazon.com/appsync/",
+    "regIP": "127.0.0.1",
+    "updateIP": "127.0.0.1"
+  }
+}
+
+
+
+
+{
+  "createtriprequestinput":  {
+    "ID" : "user01",
+	"locationID" : "sss",
+	"selectedProviders" : 5,
+    "regIP" : "127.0.0.1",
+    "updateIP" : "127.0.0.1"
+  }
+}
