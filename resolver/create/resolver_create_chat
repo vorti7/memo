@@ -1,0 +1,26 @@
+{
+  "version": "2017-02-28",
+  "operation": "PutItem",
+  "key": {
+    "ID": $util.dynamodb.toDynamoDBJson($ctx.args.input.ID),
+    "SORTKEY": $util.dynamodb.toDynamoDBJson($ctx.args.input.SORTKEY),
+  },
+  "attributeValues" : {
+	"name" :{ "S" : "${context.args.input.name}" },
+	
+	## "usersID" : [String]
+	## "users" : [User]
+	
+	"regIP" :{ "S" : "${context.args.input.regIP}" },
+	"regDate": { "S" : "$util.time.nowEpochMilliSeconds()" },
+	## "updateIP" :{ "S" : "${context.args.input.updateIP}" },
+	## "updateDate" :{ "S" : "${context.args.input.updateDate}" }
+  },
+  "condition": {
+    "expression": "attribute_not_exists(#ID) AND attribute_not_exists(#SORTKEY)",
+    "expressionNames": {
+      "#ID": "ID",
+      "#SORTKEY": "SORTKEY",
+    },
+  },
+}

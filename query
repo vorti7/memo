@@ -33,11 +33,148 @@ mutation createTripRequest($createtriprequestinput: CreateTripRequestInput!) {
     locationID
     tripReqInfo
     selectedProviders
-    recipients
-    checked
-    participants
-    refusers
+    recipientsID
+    checkedID
+    participantsID
+    refusersID
     expTime
+    regIP
+    regDate
+    updateIP
+    updateDate
+  }
+}
+
+mutation createLocation($createlocationinput: CreateLocationInput!) {
+  createLocation(input: $createlocationinput) {
+    ID
+    SORTKEY
+    region
+    locationName
+    mapInfo
+    locationInfo
+    order
+  }
+}
+
+mutation createChat($createchatinput: CreateChatInput!) {
+  createChat(input: $createchatinput) {
+    ID
+    SORTKEY
+    name
+
+    usersID
+    users{ID}
+    # providerID : String
+    # provider : [Provider]
+    # travelersID : [String]
+    # travelers : [Traveler]
+    
+    regIP
+    regDate
+    updateIP
+    updateDate
+  }
+}
+
+mutation createMessage($createmessageinput: CreateMessageInput!) {
+  createMessage(input: $createmessageinput) {
+    ID
+    SORTKEY
+    userID
+    user{ID}
+    type
+    message
+    regIP
+    regDate
+    updateIP
+    updateDate
+  }
+}
+
+mutation updateTraveler($updatetravelerinput: UpdateTravelerInput!) {
+  updateTraveler(input: $updatetravelerinput) {
+    ID
+    SORTKEY
+    locationID
+  	email
+    status
+    firstName
+    lastName
+    nickName
+    gender
+    birthday
+    phone
+    languages
+    photoURL
+    regIP
+    regDate
+    updateIP
+    updateDate
+    deactivateIP
+    deactivateDate
+  }
+}
+
+mutation updateTripRequest($updatetriprequestinput: UpdateTripRequestInput!) {
+  updateTripRequest(input: $updatetriprequestinput) {
+    ID
+    SORTKEY
+    locationID
+    tripReqInfo
+    selectedProviders
+    recipientsID
+    checkedID
+    participantsID
+    refusersID
+    expTime
+    regIP
+    regDate
+    updateIP
+    updateDate
+  }
+}
+
+mutation updateLocation($updatelocationinput: UpdateLocationInput!) {
+  updateLocation(input: $updatelocationinput) {
+    ID
+    SORTKEY
+    region
+    locationName
+    mapInfo
+    locationInfo
+    order
+  }
+}
+
+mutation updateChat($updatechatinput: UpdateChatInput!) {
+  updateChat(input: $updatechatinput) {
+    ID
+    SORTKEY
+    name
+
+    usersID
+    users{ID}
+    # providerID : String
+    # provider : [Provider]
+    # travelersID : [String]
+    # travelers : [Traveler]
+    
+    regIP
+    regDate
+    updateIP
+    updateDate
+  }
+}
+
+mutation updateMessage($updatemessageinput: UpdateMessageInput!) {
+  updateMessage(input: $updatemessageinput) {
+    ID
+    SORTKEY
+    userID
+    user{ID}
+    type
+    message
     regIP
     regDate
     updateIP
@@ -79,8 +216,8 @@ query getTravelInfo {
   }
 }
 
-query getTraveler {
-  getTraveler(ID:"user01",SORTKEY:"traveler_*") {
+query getTraveler($gettravelerinput: GetInput!) {
+  getTraveler(input: $gettravelerinput) {
     ID
     SORTKEY
     locationID
@@ -103,5 +240,68 @@ query getTraveler {
   }
 }
 
+query getTripRequest($gettriprequestinput: GetInput!) {
+  getTripRequest(input: $gettriprequestinput) {
+    ID
+    SORTKEY
+    locationID
+    tripReqInfo
+    selectedProviders
+    recipientsID
+    checkedID
+    participantsID
+    refusersID
+    expTime
+    regIP
+    regDate
+    updateIP
+    updateDate
+  }
+}
 
+query getLocation($getlocationinput: GetInput!) {
+  getLocation(input: $getlocationinput) {
+    ID
+    SORTKEY
+    region
+    locationName
+    mapInfo
+    locationInfo
+    order
+  }
+}
 
+query getChat($getchatinput: GetInput!) {
+  getChat(input: $getchatinput) {
+    ID
+    SORTKEY
+    name
+
+    usersID
+    users{ID}
+    # providerID : String
+    # provider : [Provider]
+    # travelersID : [String]
+    # travelers : [Traveler]
+    
+    regIP
+    regDate
+    updateIP
+    updateDate
+  }
+}
+
+query getMessage($getmessageinput: GetInput!) {
+  getMessage(input: $getmessageinput) {
+    ID
+    SORTKEY
+    userID
+    user{ID}
+    type
+    message
+    regIP
+    regDate
+    updateIP
+    updateDate
+  }
+}

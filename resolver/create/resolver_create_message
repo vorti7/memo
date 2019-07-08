@@ -1,0 +1,23 @@
+{
+  "version": "2017-02-28",
+  "operation": "PutItem",
+  "key": {
+    "ID": $util.dynamodb.toDynamoDBJson($ctx.args.input.ID),
+    "SORTKEY": {"S" : "message_$util.time.nowEpochMilliSeconds()"},
+  },
+  "attributeValues" : {
+	## "userID" : String
+    ## "user" : User
+	"type" : { "S" : "${context.args.input.type}" },
+	"message": { "S" : "${context.args.input.message}" },
+	"regIP" : { "S" : "${context.args.input.regIP}" },
+	"regDate": { "S" : "$util.time.nowEpochMilliSeconds()" },
+  },
+  "condition": {
+    "expression": "attribute_not_exists(#ID) AND attribute_not_exists(#SORTKEY)",
+    "expressionNames": {
+      "#ID": "ID",
+      "#SORTKEY": "SORTKEY",
+    },
+  },
+}

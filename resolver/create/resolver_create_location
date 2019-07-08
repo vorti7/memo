@@ -1,0 +1,22 @@
+{
+  "version": "2017-02-28",
+  "operation": "PutItem",
+  "key": {
+    "ID": $util.dynamodb.toDynamoDBJson($ctx.args.input.ID),
+    "SORTKEY": $util.dynamodb.toDynamoDBJson($ctx.args.input.SORTKEY),
+  },
+  "attributeValues" : {
+	"region" : { "S" : "${context.args.input.region}" },
+	"locationName" : { "S" : "${context.args.input.locationName}" },
+	## "mapInfo" : { "S" : "${context.args.input.mapInfo}" },
+	## "locationInfo" : { "S" : "${context.args.input.locationInfo}" },
+	"order" : { "S" : "${context.args.input.order}" }
+  },
+  "condition": {
+    "expression": "attribute_not_exists(#ID) AND attribute_not_exists(#SORTKEY)",
+    "expressionNames": {
+      "#ID": "ID",
+      "#SORTKEY": "SORTKEY",
+    },
+  },
+}

@@ -21,15 +21,114 @@
   }
 }
 
-
-
-
 {
   "createtriprequestinput":  {
     "ID" : "user01",
-	"locationID" : "sss",
-	"selectedProviders" : 5,
+	  "locationID" : "sss",
+	  "selectedProviders" : 5,
     "regIP" : "127.0.0.1",
     "updateIP" : "127.0.0.1"
+  }
+}
+
+{
+  "createlocationinput":  {
+    "ID" : "locationID01",
+    "SORTKEY" : "location_LA0001",
+    "region" : "Earth",
+    "locationName" : "ASIA/KOREA"
+  }
+}
+
+{
+  "createchatinput": {
+    "ID" : "chatID01",
+    "SORTKEY" : "tripOfferID01",
+    "name" : "chat room 01",
+    "regIP" : "127.0.0.1"
+  }
+}
+
+{
+  "createmessageinput": {
+    "ID" : "chatID01",
+    "type" : "text",
+    "message" : "Welcome!",
+    "regIP" : "127.0.0.1"
+  }
+}
+
+{
+  "updatetravelerinput": {
+    "ID" : "user01",
+    "SORTKEY" : "traveler_1562302210622",
+    "locationID" : "New York"
+  }
+}
+
+{
+  "updatetriprequestinput": {
+    "ID" : "user01",
+    "SORTKEY": "trip_req_1562488532409",
+    "locationID": "locationID01#location_LA0001"
+  }
+}
+
+{
+  "updatelocationinput": {
+    "ID" : "locationID02",
+    "SORTKEY": "location#LA0001",
+    "region": "ap01"
+  }
+}
+
+{
+  "updatechatinput": {
+    "ID" : "chatID01",
+    "SORTKEY": "tripOfferID01",
+    "name": "valid chat room 01"
+  }
+}
+
+{
+  "updatechatinput": {
+    "ID" : "chatID01",
+    "SORTKEY": "message_1562568837663",
+    "message": "nice to see you again"
+  }
+}
+
+{
+  "gettravelerinput": {
+      "ID": "user02",
+      "SORTKEY": "traveler_1562309422293"
+  }
+}
+
+{
+  "gettriprequestinput": {
+      "ID": "user01",
+      "SORTKEY": "trip_req_1562488532409"
+  }
+}
+
+{
+  "getlocationinput": {
+      "ID": "locationID01",
+      "SORTKEY": "location#LA0001"
+  }
+}
+
+{
+  "getchatinput": {
+      "ID": "chatID01",
+      "SORTKEY": "tripOfferID01"
+  }
+}
+
+{
+  "getmessageinput": {
+      "ID": "chatID01",
+      "SORTKEY": "message_1562568837663"
   }
 }

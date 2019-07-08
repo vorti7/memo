@@ -1,7 +1,31 @@
-type Traveler {
+interface User {
+	ID : String!
+	SORTKEY : String!
+	locationID : String
+	location: Location
+	email : AWSEmail
+	status : String
+	firstName : String
+	lastName : String
+	nickName : String
+	gender : String
+	birthday : AWSDate
+	phone : AWSPhone
+	languages : [String]
+	photoURL : AWSURL
+	regIP : AWSIPAddress
+	regDate : String
+	updateIP : AWSIPAddress
+	updateDate : String
+	deactivateIP : AWSIPAddress
+	deactivateDate : String
+}
+
+type Traveler implements User {
 	ID: String!
 	SORTKEY: String!
 	locationID: String
+	location: Location
 	email: AWSEmail
 	status: String
 	firstName: String
@@ -20,16 +44,54 @@ type Traveler {
 	deactivateDate: String
 }
 
+type Provider implements User {
+	ID : String!
+	SORTKEY : String!
+	locationID : String
+	location: Location
+	email : AWSEmail
+	status : String
+	firstName : String
+	lastName : String
+	nickName : String
+	gender : String
+	birthday : AWSDate
+	phone : AWSPhone
+	languages : [String]
+	photoURL : AWSURL
+	regIP : AWSIPAddress
+	regDate : String
+	updateIP : AWSIPAddress
+	updateDate : String
+	deactivateIP : AWSIPAddress
+	deactivateDate : String
+
+
+	type : String
+	companyID : String
+	companyStatus : String
+	campanyInfo :AWSJSON
+	certInfo :AWSJSON
+	welcomeMSG : String
+	serviceList : String
+}
+
+
 type TripRequest {
 	ID : String!
 	SORTKEY : String!
 	locationID : String
+	location: Location
 	tripReqInfo : AWSJSON
 	selectedProviders : Int
-	recipients : [String]
-	checked : [String]
-	participants : [String]
-	refusers : [String]
+	recipientsID : [String]
+	checkedID : [String]
+	participantsID : [String]
+	refusersID : [String]
+	# recipients : [Provider]
+	# checked : [Provider]
+	# participants : [Provider]
+	# refusers : [Provider]
 	expTime : String
 	regIP : AWSIPAddress
 	regDate : String
@@ -40,30 +102,36 @@ type TripRequest {
 type Location {
 	ID : String!
 	SORTKEY : String!
-	region : String!
-	locationName : String!
+	region : String
+	locationName : String
 	mapInfo : AWSJSON
 	locationInfo : AWSJSON
-	order : AWSJSON
+	order : String
 }
 
 type Chat {
 	ID : String!
 	SORTKEY : String!
 	name : String
-	user : [String]
+	
+	usersID : [String]
+	users : [User]
+	# providerID : String
+	# provider : [Provider]
+	# travelersID : [String]
+	# travelers : [Traveler]
+	
 	regIP : AWSIPAddress
 	regDate : String
 	updateIP : AWSIPAddress
 	updateDate : String
 }
 
- 
-
 type Message {
 	ID : String!
 	SORTKEY : String!
 	userID : String
+	user : User
 	type : String
 	message: String
 	regIP : AWSIPAddress
@@ -96,21 +164,22 @@ input CreateTripRequestInput {
 	locationID : String
 	tripReqInfo : AWSJSON
 	selectedProviders : Int
-	recipients : [String]
-	checked : [String]
-	participants : [String]
-	refusers : [String]
+	recipientsID : [String]
+	checkedID : [String]
+	participantsID : [String]
+	refusersID : [String]
 	expTime : AWSDateTime
 	regIP : AWSIPAddress
-	# regDate : AWSDateTime
+	# regDate : String
 	# updateIP : AWSIPAddress
-	# updateDate : AWSDateTime
+	# updateDate : String
 }
 
 input CreateLocationInput {
 	ID : String!
-	region : String!
-	locationName : String!
+	SORTKEY : String!
+	region : String
+	locationName : String
 	mapInfo : AWSJSON
 	locationInfo : AWSJSON
 	order : AWSJSON
@@ -118,8 +187,10 @@ input CreateLocationInput {
 
 input CreateChatInput {
 	ID : String!
+	SORTKEY : String!
 	name : String
-	user : [String]
+	usersID : [String]
+	# users : [User]
 	regIP : AWSIPAddress
 	# regDate : String
 	# updateIP : AWSIPAddress
@@ -129,6 +200,7 @@ input CreateChatInput {
 input CreateMessageInput {
 	ID : String!
 	userID : String
+	# user : User
 	type : String
 	message: String
 	regIP : AWSIPAddress
@@ -158,6 +230,63 @@ input UpdateTravelerInput {
 	updateDate: String
 	deactivateIP: AWSIPAddress
 	deactivateDate: String
+}
+
+input UpdateTripRequestInput {
+	ID : String!
+	SORTKEY : String!
+	locationID : String
+	tripReqInfo : AWSJSON
+	selectedProviders : Int
+	recipientsID : [String]
+	checkedID : [String]
+	participantsID : [String]
+	refusersID : [String]
+	expTime : AWSDateTime
+	regIP : AWSIPAddress
+	regDate : String
+	updateIP : AWSIPAddress
+	updateDate : String
+}
+
+input UpdateLocationInput {
+	ID : String!
+	SORTKEY : String!
+	region : String
+	locationName : String
+	mapInfo : AWSJSON
+	locationInfo : AWSJSON
+	order : AWSJSON
+}
+
+input UpdateChatInput {
+	ID : String!
+	SORTKEY : String!
+	name : String
+	# usersID : [String]
+	# users : [User]
+	regIP : AWSIPAddress
+	regDate : String
+	updateIP : AWSIPAddress
+	updateDate : String
+}
+
+input UpdateMessageInput {
+	ID : String!
+	SORTKEY : String!
+	# userID : String
+	# user : User
+	type : String
+	message: String
+	regIP : AWSIPAddress
+	regDate : String
+	updateIP : AWSIPAddress
+	updateDate : String
+}
+
+input GetInput {
+	ID: String!
+	SORTKEY: String!
 }
 
 input DeleteTravelerInput {
@@ -195,11 +324,20 @@ type Mutation {
 	createChat(input: CreateChatInput!): Chat
 	createMessage(input: CreateMessageInput!): Message
 	updateTraveler(input: UpdateTravelerInput!): Traveler
+	updateTripRequest(input: UpdateTripRequestInput!): TripRequest
+	updateLocation(input: UpdateLocationInput!): Location
+	updateChat(input: UpdateChatInput!): Chat
+	updateMessage(input: UpdateMessageInput!): Message
 	deleteTraveler(input: DeleteTravelerInput!): Traveler
 }
 
 type Query {
-	getTraveler(ID: String!, SORTKEY: String!): Traveler
+	getTraveler(input: GetInput!): Traveler
+	getTripRequest(input: GetInput!): TripRequest
+	getLocation(input: GetInput!): Location
+	getChat(input: GetInput!): Chat
+	getMessage(input: GetInput!): Message
+
 	listTravelers(filter: TableTravelerFilterInput, limit: Int, nextToken: String): TravelerConnection
 }
 
