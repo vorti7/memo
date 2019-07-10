@@ -8,8 +8,7 @@
   "attributeValues" : {
 	"name" :{ "S" : "${context.args.input.name}" },
 	
-	## "usersID" : [String]
-	## "users" : [User]
+	"usersID" : $util.dynamodb.toDynamoDBJson(${context.args.input.usersID}),
 	
 	"regIP" :{ "S" : "${context.args.input.regIP}" },
 	"regDate": { "S" : "$util.time.nowEpochMilliSeconds()" },

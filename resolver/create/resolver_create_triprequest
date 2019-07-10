@@ -9,15 +9,19 @@
 	"locationID": { "S" : "${context.args.input.locationID}" },
 	## "tripReqInfo": { "S" : "" },
 	"selectedProviders": { "N" : "${context.args.input.selectedProviders}" },
-	## "recipients" : [String]
-	## "checked" : [String]
-	## "participants" : [String]
-	## "refusers" : [String]
+	"recipientsID" : $util.dynamodb.toDynamoDBJson(${context.args.input.recipientsID}),
+	"checkedID" : $util.dynamodb.toDynamoDBJson(${context.args.input.checkedID}),
+	"participantsID" : $util.dynamodb.toDynamoDBJson(${context.args.input.participantsID}),
+	"refusersID" : $util.dynamodb.toDynamoDBJson(${context.args.input.refusersID}),
+	## "recipients" : [Provider]
+	## "checked" : [Provider]
+	## "participants" : [Provider]
+	## "refusers" : [Provider]
     "expTime" : { "S" : "$util.time.nowEpochMilliSeconds()" },
 	"regIP": { "S" : "${context.args.input.regIP}" },
 	"regDate": { "S" : "$util.time.nowEpochMilliSeconds()" },
-	"updateIP": { "S" : "${context.args.input.updateIP}" },
-	"updateDate": { "S" : "$util.time.nowEpochMilliSeconds()" },
+	## "updateIP": { "S" : "${context.args.input.updateIP}" },
+	## "updateDate": { "S" : "$util.time.nowEpochMilliSeconds()" },
 	## "deactivateIP": { "S" : "${context.arguments.deactivateIP}" },
 	## "deactivateDate": { "S" : "" },
   },

@@ -1,4 +1,6 @@
 interface User {
+	__typename : String!
+
 	ID : String!
 	SORTKEY : String!
 	locationID : String
@@ -22,6 +24,8 @@ interface User {
 }
 
 type Traveler implements User {
+	__typename : String!
+
 	ID: String!
 	SORTKEY: String!
 	locationID: String
@@ -45,6 +49,7 @@ type Traveler implements User {
 }
 
 type Provider implements User {
+	__typename : String!
 	ID : String!
 	SORTKEY : String!
 	locationID : String
@@ -104,8 +109,8 @@ type Location {
 	SORTKEY : String!
 	region : String
 	locationName : String
-	mapInfo : AWSJSON
-	locationInfo : AWSJSON
+	# mapInfo : AWSJSON
+	# locationInfo : AWSJSON
 	order : String
 }
 
@@ -141,8 +146,10 @@ type Message {
 }
 
 input CreateTravelerInput {
+	# __typename : String!
 	ID: String!
 	locationID: String
+	# location: CreateLocationInput
 	email: AWSEmail
 	status: String
 	firstName: String
@@ -154,9 +161,9 @@ input CreateTravelerInput {
 	languages: [String]
 	photoURL: AWSURL
 	regIP: AWSIPAddress
-	regDate: String
-	updateIP: AWSIPAddress
-	updateDate: String
+	# regDate: String
+	# updateIP: AWSIPAddress
+	# updateDate: String
 }
 
 input CreateTripRequestInput {
@@ -180,8 +187,8 @@ input CreateLocationInput {
 	SORTKEY : String!
 	region : String
 	locationName : String
-	mapInfo : AWSJSON
-	locationInfo : AWSJSON
+	# mapInfo : AWSJSON
+	# locationInfo : AWSJSON
 	order : AWSJSON
 }
 
@@ -211,9 +218,11 @@ input CreateMessageInput {
 
 
 input UpdateTravelerInput {
+	# __typename : String!
 	ID: String!
 	SORTKEY: String!
 	locationID: String
+	# location: UpdateLocationInput
 	email: AWSEmail
 	status: String
 	firstName: String
@@ -254,9 +263,9 @@ input UpdateLocationInput {
 	SORTKEY : String!
 	region : String
 	locationName : String
-	mapInfo : AWSJSON
-	locationInfo : AWSJSON
-	order : AWSJSON
+	# mapInfo : AWSJSON
+	# locationInfo : AWSJSON
+	order : String
 }
 
 input UpdateChatInput {
@@ -274,7 +283,7 @@ input UpdateChatInput {
 input UpdateMessageInput {
 	ID : String!
 	SORTKEY : String!
-	# userID : String
+	userID : String
 	# user : User
 	type : String
 	message: String
@@ -332,6 +341,7 @@ type Mutation {
 }
 
 type Query {
+	getUser(input: GetInput!): User
 	getTraveler(input: GetInput!): Traveler
 	getTripRequest(input: GetInput!): TripRequest
 	getLocation(input: GetInput!): Location

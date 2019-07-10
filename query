@@ -7,6 +7,7 @@ mutation createTraveler($createtravelerinput: CreateTravelerInput!) {
     ID
     SORTKEY
     locationID
+    # location
   	email
     status
     firstName
@@ -18,11 +19,6 @@ mutation createTraveler($createtravelerinput: CreateTravelerInput!) {
     languages
     photoURL
     regIP
-    regDate
-    updateIP
-    updateDate
-    deactivateIP
-    deactivateDate
   }
 }
 
@@ -51,8 +47,7 @@ mutation createLocation($createlocationinput: CreateLocationInput!) {
     SORTKEY
     region
     locationName
-    mapInfo
-    locationInfo
+    # mapInfo
     order
   }
 }
@@ -141,8 +136,7 @@ mutation updateLocation($updatelocationinput: UpdateLocationInput!) {
     SORTKEY
     region
     locationName
-    mapInfo
-    locationInfo
+    # mapInfo
     order
   }
 }
@@ -216,11 +210,47 @@ query getTravelInfo {
   }
 }
 
-query getTraveler($gettravelerinput: GetInput!) {
-  getTraveler(input: $gettravelerinput) {
+query getUser($getuserinput: GetInput!) {
+  getUser(input: $getuserinput) {
+    __typename
     ID
     SORTKEY
     locationID
+    location {
+      region
+      locationName
+      order
+    }
+    email
+    status
+    firstName
+    lastName
+    nickName
+    gender
+    birthday
+    phone
+    languages
+    photoURL
+    regIP
+    regDate
+    updateIP
+    updateDate
+    deactivateIP
+    deactivateDate
+  }
+}
+
+query getTraveler($gettravelerinput: GetInput!) {
+  getTraveler(input: $gettravelerinput) {
+    __typename
+    ID
+    SORTKEY
+    locationID
+    location {
+      region
+      locationName
+      order
+    }
     email
     status
     firstName
@@ -265,8 +295,7 @@ query getLocation($getlocationinput: GetInput!) {
     SORTKEY
     region
     locationName
-    mapInfo
-    locationInfo
+    # mapInfo
     order
   }
 }
@@ -296,7 +325,33 @@ query getMessage($getmessageinput: GetInput!) {
     ID
     SORTKEY
     userID
-    user{ID}
+    user{
+      __typename
+      ID
+      SORTKEY
+      locationID
+      location {
+        region
+        locationName
+        order
+      }
+      email
+      status
+      firstName
+      lastName
+      nickName
+      gender
+      birthday
+      phone
+      languages
+      photoURL
+      regIP
+      regDate
+      updateIP
+      updateDate
+      deactivateIP
+      deactivateDate
+    }
     type
     message
     regIP
